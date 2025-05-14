@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="576.0" prefWidth="1024.0" stylesheets="@styling.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <GridPane prefHeight="513.0" prefWidth="1005.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="571.0" minHeight="10.0" prefHeight="548.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="1015.0">
+               <children>
+                  <TableView layoutX="450.0" layoutY="315.0" prefHeight="217.0" prefWidth="563.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <PieChart layoutX="789.0" layoutY="109.0" prefHeight="157.0" prefWidth="212.0" />
+                  <BarChart layoutX="435.0" layoutY="108.0" prefHeight="182.0" prefWidth="334.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+                  <Button layoutX="971.0" layoutY="278.0" mnemonicParsing="false">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="PENCIL" />
+                     </graphic>
+                  </Button>
+                  <Button layoutX="930.0" layoutY="278.0" mnemonicParsing="false">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="PLUS" />
+                     </graphic>
+                  </Button>
+                  <Label layoutX="866.0" layoutY="7.0" text="1/05/2025 - 14/05/2025" />
+                  <Label layoutX="486.0" layoutY="25.0" text="Kategori 1" />
+                  <Label layoutX="486.0" layoutY="76.0" text="Kategori 3" />
+                  <Label layoutX="663.0" layoutY="25.0" text="Kategori 4" />
+                  <Label layoutX="486.0" layoutY="51.0" text="Kategori 2" />
+                  <Label layoutX="663.0" layoutY="51.0" text="Kategori 5" />
+                  <Label layoutX="663.0" layoutY="76.0" text="Kategori 6" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="462.0" layoutY="26.0" stroke="BLACK" strokeType="INSIDE" width="18.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff411f" height="17.0" layoutX="462.0" layoutY="52.0" stroke="BLACK" strokeType="INSIDE" width="18.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5a1fff" height="17.0" layoutX="462.0" layoutY="77.0" stroke="BLACK" strokeType="INSIDE" width="18.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#56ff1f" height="17.0" layoutX="639.0" layoutY="25.0" stroke="BLACK" strokeType="INSIDE" width="18.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f9ff1f" height="17.0" layoutX="639.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" width="18.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffac1f" height="17.0" layoutX="639.0" layoutY="75.0" stroke="BLACK" strokeType="INSIDE" width="18.0" />
+                  <Label layoutX="14.0" layoutY="15.0" text="Jumlah Uang:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="13.0" layoutY="43.0" text="Rp. 0.00">
+                     <font>
+                        <Font size="45.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="14.0" layoutY="108.0" mnemonicParsing="false">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="PENCIL" />
+                     </graphic>
+                  </Button>
+                  <TableView layoutX="14.0" layoutY="221.0" prefHeight="240.0" prefWidth="392.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Button layoutX="14.0" layoutY="461.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="392.0" text="+" />
+                  <Label layoutX="7.0" layoutY="182.0" text="Kategori">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </GridPane>
+   </center>
+   <top>
+      <MenuButton mnemonicParsing="false" BorderPane.alignment="CENTER_RIGHT">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+         <graphic>
+            <FontAwesomeIconView glyphName="BARS" />
+         </graphic>
+      </MenuButton>
+   </top>
+   <padding>
+      <Insets bottom="-10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</BorderPane>
