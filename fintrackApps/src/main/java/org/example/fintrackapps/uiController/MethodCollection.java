@@ -146,30 +146,20 @@ public class MethodCollection {
         return cssColor;
     }
 
-    public Double[] cssRgbaToDouble(String rgba){
-        MethodCollection method = new MethodCollection();
-        String[] splittedRgba = rgba.split(",");
-        System.out.println(Arrays.toString(splittedRgba));
-
-        for (int i = 0; i < splittedRgba.length;i++){
-            char[] data = splittedRgba[i].toCharArray();
-            StringBuilder temp = new StringBuilder();
-            for (int j = 0; j < data.length; j++){
-                if(method.isNum(String.valueOf(data[j]))){
-                    temp.append(data[j]);
-                }
-            }
-            splittedRgba[i] = temp.toString();
-        }
-        splittedRgba[splittedRgba.length-2] = splittedRgba[splittedRgba.length-2].toString() + "." + splittedRgba[splittedRgba.length-1].toString();
-//        splittedRgba.
+    public Double[] cssRgbaToDouble(String rgba) {
+        rgba = rgba.replace("rgba(", "").replace(")", "");
+        String[] parts = rgba.split(",");
         Double[] result = new Double[4];
-        for (int i = 0; i < 4; i++){
-            result[i] = Double.parseDouble(splittedRgba[i]);
+        for (int i = 0; i < 4; i++) {
+            result[i] = Double.parseDouble(parts[i].trim());
         }
-        System.out.println(Arrays.toString(result));
+        if (result[3] > 1.0) {
+            result[3] = result[3] / 100.0;
+        }
         return result;
     }
+
+
 
     public Rectangle createRectangle(Double width, Double Height, String rgba){
         Rectangle rectangle = new Rectangle(width, Height); // width, height
