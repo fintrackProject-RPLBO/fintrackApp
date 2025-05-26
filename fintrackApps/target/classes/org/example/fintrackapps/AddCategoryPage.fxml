@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane prefHeight="288.0" prefWidth="327.0" styleClass="container" stylesheets="@styling.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.fintrackapps.uiController.AddKategoriController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="84.0" minWidth="10.0" prefWidth="39.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="379.0" minWidth="10.0" prefWidth="238.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="63.0" minWidth="0.0" prefWidth="45.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="81.0" minHeight="10.0" prefHeight="81.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <Label text="Tambah Kategori" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+
+                    <Label text="Category Name" />
+              <TextField fx:id="namaKategori" prefHeight="0.0" prefWidth="303.0" styleClass="textfield" />
+         </children>
+      </VBox>
+      <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <children>
+            <CheckBox fx:id="dailyLimitCheckBox" mnemonicParsing="false" text="Daily Limit">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </CheckBox>
+              <TextField fx:id="limit" prefHeight="0.0" prefWidth="303.0" promptText="Rp. " styleClass="textfield" />
+         </children>
+      </VBox>
+
+           <Button onAction="#addKategori" prefHeight="25.0" prefWidth="257.0" styleClass="saveButton" text="Submit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <ColorPicker fx:id="colorPicker" prefHeight="25.0" prefWidth="241.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+   </children>
+</GridPane>

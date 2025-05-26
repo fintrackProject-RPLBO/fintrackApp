@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane prefHeight="292.0" prefWidth="346.0" styleClass="container" stylesheets="@styling.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.fintrackapps.uiController.AddCatatanPageController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="84.0" minWidth="9.0" prefWidth="47.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="379.0" minWidth="10.0" prefWidth="250.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="67.0" minWidth="0.0" prefWidth="49.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <Label text="Tambah Catatan Keuangan" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+              <Label text="Category" />
+              <ComboBox fx:id="category" prefHeight="0.0" prefWidth="303.0" promptText="Choose Category" styleClass="textfield" />
+         </children>
+      </VBox>
+      <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <children>
+   
+                    <Label text="Price" />
+              <TextField fx:id="priceField" prefHeight="0.0" prefWidth="303.0" promptText="Rp. " styleClass="textfield" />
+         </children>
+      </VBox>
+       <VBox prefWidth="300" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
+
+              <Label text="Date" />
+           <DatePicker fx:id="date" prefHeight="0.0" prefWidth="303.0" />
+       </VBox>
+      <VBox GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <children>
+   
+                    <Label text="Description" />
+              <TextField fx:id="descriptionField" prefHeight="0.0" prefWidth="303.0" styleClass="textfield" />
+         </children>
+      </VBox>
+
+           <Button onAction="#addCatatan" prefHeight="25.0" prefWidth="299.0" styleClass="saveButton" text="Submit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+   </children>
+</GridPane>

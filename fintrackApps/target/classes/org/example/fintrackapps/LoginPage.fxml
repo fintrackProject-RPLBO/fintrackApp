@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="251.0" prefWidth="318.0" spacing="20.0" styleClass="container" stylesheets="@styling.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.fintrackapps.uiController.LoginPageController">
+    <effect>
+        <DropShadow color="#40000000" offsetX="0" offsetY="4" radius="10" />
+    </effect>
+    <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+   <Label text="Login Page">
+      <font>
+         <Font name="System Bold" size="22.0" />
+      </font>
+   </Label>
+   <GridPane alignment="CENTER" hgap="10" prefHeight="335.0" prefWidth="306.0" vgap="10">
+     <columnConstraints>
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="98.0" />
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="170.0" />
+     </columnConstraints>
+     <rowConstraints>
+       <RowConstraints maxHeight="142.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+       <RowConstraints maxHeight="127.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="135.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="135.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+     </rowConstraints>
+      <children>
+
+        <Label text="Username: " />
+         <TextField fx:id="tfUsername" styleClass="textfield" GridPane.columnIndex="1" />
+         <Label layoutX="10.0" layoutY="57.0" text="Password: " GridPane.rowIndex="1" />
+         <PasswordField fx:id="pfPassword" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#loginBtn" prefHeight="25.0" prefWidth="346.0" styleClass="defaultButton" text="Login" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+         <Button layoutX="76.0" layoutY="150.0" mnemonicParsing="false" onAction="#registerBtn" prefHeight="25.0" prefWidth="96.0" text="Register" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+            <styleClass>
+               <String fx:value="hyperlinkText" />
+               <String fx:value="transparentBackground" />
+            </styleClass></Button>
+         <Label layoutX="10.0" layoutY="86.0" prefHeight="17.0" prefWidth="126.0" text="Dont have an account?" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+      </children>
+   </GridPane>
+</VBox>

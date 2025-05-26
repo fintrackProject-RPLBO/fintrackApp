@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="251.0" prefWidth="318.0" styleClass="container" stylesheets="@styling.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.fintrackapps.uiController.DeleteAccountPageController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="361.20001220703125" minWidth="10.0" prefWidth="159.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="470.59994354248045" minWidth="10.0" prefWidth="212.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="128.60001220703126" minHeight="0.0" prefHeight="52.00001831054688" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="128.60001220703126" minHeight="0.0" prefHeight="3.800003814697263" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="266.8" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="291.20001831054685" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="276.40001525878904" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="276.40001525878904" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="411.0" text="Delete Account Page" textAlignment="CENTER" GridPane.columnSpan="2">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label prefHeight="18.0" prefWidth="300.0" text="Password: " GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Re-enter Password: " GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <PasswordField fx:id="passwordField" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </GridPane.margin>
+      </PasswordField>
+      <PasswordField fx:id="passwordFieldRe_enter" prefHeight="25.0" prefWidth="247.0" styleClass="textfield" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </GridPane.margin>
+      </PasswordField>
+      <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteBtn" prefHeight="25.0" prefWidth="66.0" styleClass="deleteButton" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#cancelBtn" prefHeight="25.0" prefWidth="66.0" styleClass="saveButton" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="90.0" />
+         </GridPane.margin>
+      </Button>
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+         <children>
+            <Label alignment="CENTER" prefHeight="18.0" prefWidth="602.0" text="By doing this you will permanently remove your account," />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="452.0" text="enter your password twice for confirmation." textAlignment="CENTER" />
+         </children>
+      </VBox>
+   </children>
+</GridPane>
