@@ -122,6 +122,24 @@ public class MethodCollection {
         return false;
     }
 
+    Boolean isThereAnyNum(String str){
+        for(Character i : str.toCharArray()){
+            if (isNum(String.valueOf(i))){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    Boolean isThereAnySymbol(String str){
+        for(Character i : str.toCharArray()){
+            if (!isAlpha(i) && !isNum(String.valueOf(i))){
+                return true;
+            }
+        }
+        return false;
+    }
+
     String idrFormat(Double amount){
         double number = amount;
 

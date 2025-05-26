@@ -56,10 +56,10 @@ public class RegisterPageControl {
                         method.confirmationAlert("username dan password tidak boleh kosong");
                     }
                     else if(userdata.register(username,password)){
-                        categoryTable.addKategori(50000.0,"Makanan",username);
-                        categoryTable.addKategori(50000.0,"Transportasi",username);
-                        categoryTable.addKategori(50000.0,"Pakaian",username);
-                        categoryTable.addKategori(50000.0,"Lainnya",username);
+                        categoryTable.addKategori(50000.0,"Makanan",username, "Harian");
+                        categoryTable.addKategori(50000.0,"Transportasi",username, "Harian");
+                        categoryTable.addKategori(50000.0,"Pakaian",username, "Harian");
+                        categoryTable.addKategori(50000.0,"Lainnya",username, "Harian");
                         method.confirmationAlert("akun berhasil di daftarkan!");
                         containerController.ShowLoginForm();
                     }else {

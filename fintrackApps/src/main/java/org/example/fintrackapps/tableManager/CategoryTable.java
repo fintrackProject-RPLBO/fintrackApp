@@ -45,7 +45,7 @@ public class CategoryTable {
         return false;
     }
 
-    public Boolean addKategori(Double limit, String namaKategori,String color) throws SQLException {
+    public Boolean addKategori(Double limit, String namaKategori,String color,String range) throws SQLException {
         String user = session.getUsername();
         if (user == null){
             return false;
@@ -54,26 +54,36 @@ public class CategoryTable {
                 return false;
             }
             else{
-                addKategori(limit,namaKategori,user,color);
+                addKategori(limit,namaKategori,user,color,range);
                 return true;
             }
         }
     }
 
-    public Boolean addKategori(Double limit, String namaKategori,String username,String color) throws SQLException {
-        db.CUDQuery("INSERT INTO kategori VALUES (?,?,?,?)",new String[] {namaKategori,limit.toString(),username,color}, "TEXT NUMERIC TEXT TEXT");
+    public Boolean addKategori(Double limit, String namaKategori,String username,String color, String range) throws SQLException {
+        db.CUDQuery("INSERT INTO kategori VALUES (?,?,?,?,?)",new String[] {namaKategori,limit.toString(),username,color,range}, "TEXT NUMERIC TEXT TEXT TEXT");
         return true;
     }
 
-    public boolean editKategori(String category,Double limit,String color) throws SQLException {
+    public boolean editKategori(String category,Double limit,String color,String range) throws SQLException {
         String user = session.getUsername();
         if (user == null){
             return false;
         }else{
             String kategori = session.getClickedDataKategori()[0].toString();
-            db.CUDQuery("UPDATE kategori SET category = ?, priceLimit = ?,color = ? WHERE user = ? AND category = ?",new String[] {kategori,limit.toString(),color,session.getUsername(),kategori}, "TEXT NUMERIC TEXT TEXT TEXT");
+            db.CUDQuery("UPDATE kategori SET category = ?, priceLimit = ?,color = ?,range = ? WHERE user = ? AND category = ?",new String[] {kategori,limit.toString(),color,range,session.getUsername(),kategori}, "TEXT NUMERIC TEXT TEXT TEXT TEXT");
             return true;
         }
+    }
+
+    public String getRange(String category) throws SQLException {
+        ArrayList<Object[]> data = getAllDataKategori();
+        for (Object[] i : data){
+            if (i[0].toString().equals(category)){
+                return  i[4].toString();
+            }
+        }
+        return null;
     }
 
     public boolean deleteKategori() throws SQLException {

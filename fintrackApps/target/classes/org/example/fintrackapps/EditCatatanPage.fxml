@@ -32,7 +32,6 @@
       </VBox>
       <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-      
                     <Label text="Harga" />
               <TextField fx:id="priceField" prefWidth="300" promptText="Rp." styleClass="textfield" />
          </children>

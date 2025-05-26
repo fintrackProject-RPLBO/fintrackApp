@@ -1,17 +1,19 @@
 package org.example.fintrackapps.uiController;
 
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ColorPicker;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import org.example.fintrackapps.dataBaseManager.Session;
 import org.example.fintrackapps.tableManager.CategoryTable;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 
 public class EditKategoriPageController {
+    private static final Logger log = LoggerFactory.getLogger(EditKategoriPageController.class);
     Session session = Session.getInstance();
+    MethodCollection method = new MethodCollection();
     CategoryTable categoryTable = CategoryTable.getInstance();
 
 
@@ -20,6 +22,11 @@ public class EditKategoriPageController {
     @FXML private TextField limit;
     @FXML private ColorPicker colorPicker;
     @FXML private CheckBox dailyLimitCheckBox;
+
+    @FXML private RadioButton harian;
+    @FXML private RadioButton mingguan;
+    @FXML private RadioButton bulanan;
+    ToggleGroup group = new ToggleGroup();
 
     private MainPageController mainPageController;
 
@@ -35,19 +42,38 @@ public class EditKategoriPageController {
             if (!newVal.startsWith("Rp. ")) {
                 limit.setText("Rp. " + newVal.replace("Rp. ", ""));
             }});
+        setupValue();
         dailyLimitCheckBox.setOnAction(event -> {
             if (!dailyLimitCheckBox.isSelected()) {
+                limit.setVisible(false);
                 limit.setEditable(false);
-                limit.clear();
+                limit.clear(); // or inputField.setText("");
+
+                harian.setVisible(false);
+                mingguan.setVisible(false);
+                bulanan.setVisible(false);
+
             }else{
                 limit.setEditable(true);
+                limit.setVisible(true);
+
+                harian.setVisible(true);
+                mingguan.setVisible(true);
+                bulanan.setVisible(true);
             }
         });
-        setupValue();
-
         if (!dailyLimitCheckBox.isSelected()){
             limit.setEditable(false);
+            limit.setVisible(false);
+            harian.setVisible(false);
+            mingguan.setVisible(false);
+            bulanan.setVisible(false);
         }
+
+
+        harian.setToggleGroup(group);
+        mingguan.setToggleGroup(group);
+        bulanan.setToggleGroup(group);
     }
 
     @FXML
@@ -55,6 +81,7 @@ public class EditKategoriPageController {
         String kategori = session.getClickedDataKategori()[0].toString();
         Double harga = Double.parseDouble( session.getClickedDataKategori()[1].toString());
         String color = session.getClickedDataKategori()[2].toString();
+        String range = session.getClickedDataKategori()[3].toString();
 
         namaKategori.setText(kategori);
         if (harga < 0){
@@ -65,13 +92,44 @@ public class EditKategoriPageController {
             limit.setText(String.valueOf(harga));
         }
         colorPicker.setValue(Color.web(color));
+
+        if (range.equals("Harian")){
+            harian.setSelected(true);
+        }else if (range.equals("Mingguan")) {
+            mingguan.setSelected(true);
+        }else if (range.equals("Bulanan")){
+            bulanan.setSelected(true);
+        }
+
     }
 
     @FXML
     private void editKategori() throws SQLException {
-        categoryTable.editKategori(namaKategori.getText(), Double.parseDouble(limit.getText().split(" ")[1]),colorPicker.getValue().toString());
-        session.unsetClickedDataKategori();
-        mainPageController.removePopUp();
+        RadioButton selectedRadio = (RadioButton) group.getSelectedToggle();
+        String range = (selectedRadio != null) ? selectedRadio.getText() : "-" ;
+        String limitText = (limit.getText().split(" ").length > 1) ? limit.getText().split(" ")[1] : null;
+        Double dailyLimit = -1.0;
+
+
+        if (dailyLimitCheckBox.isSelected()){
+            if (limitText == null){
+                method.confirmationAlert("limit tidak boleh kosong");
+            } else if (method.isThereAnyLetter(limitText) || method.isThereAnySymbol(limitText)){
+                method.confirmationAlert("Kolom Batasan Harian Tidak Boleh Memiliki Huruf Atau Simbol");
+            }
+            else{
+                dailyLimit = Double.parseDouble(limit.getText().split(" ")[1]);
+                categoryTable.editKategori(namaKategori.getText(), dailyLimit,colorPicker.getValue().toString(),range);
+                session.unsetClickedDataKategori();
+                mainPageController.removePopUp();
+            }
+        }else{
+            categoryTable.editKategori(namaKategori.getText(), dailyLimit,colorPicker.getValue().toString(),range);
+            session.unsetClickedDataKategori();
+            mainPageController.removePopUp();
+        }
+
+
     }
 
     @FXML

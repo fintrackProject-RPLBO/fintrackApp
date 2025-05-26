@@ -424,6 +424,7 @@ public class MainPageController {
                 limitKategori = rawData.get(i)[1].toString();
             }
             String color = rawData.get(i)[3].toString();
+            String range = categoryTable.getRange(namaKategori);
 
             Label labelKategori = new Label(namaKategori);
             Rectangle colorBox = method.createRectangle(18.0,17.0,method.toCssColor(color));
@@ -436,7 +437,7 @@ public class MainPageController {
             editButton.setGraphic(editIcon);
             editButton.setStyle("-fx-background-color: transparent;");
             editButton.setOnAction(event->{
-                session.setClickedDataKategori(new Object[] {namaKategori,limitKategori,color});
+                session.setClickedDataKategori(new Object[] {namaKategori,limitKategori,color,range});
                 try {
                     showEditKategoriForm();
                 } catch (SQLException e) {

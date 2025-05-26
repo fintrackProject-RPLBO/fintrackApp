@@ -7,6 +7,9 @@ module org.example.fintrackapps {
     requires java.desktop;
     requires itextpdf;
     requires javafx.swing;
+    requires quarkus.jdbc.sqlite;
+    requires javafx.swingEmpty;
+    requires org.slf4j;
 
 
     opens org.example.fintrackapps.uiController to javafx.fxml;
