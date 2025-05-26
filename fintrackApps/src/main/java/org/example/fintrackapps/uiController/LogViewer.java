@@ -11,21 +11,15 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.fintrackapps.dataBaseManager.Session;
-import org.example.fintrackapps.tableManager.CatatanKeuanganTable;
 import org.example.fintrackapps.tableManager.CategoryTable;
-import org.example.fintrackapps.tableManager.JumlahUangUser;
 import org.example.fintrackapps.tableManager.LogManager;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Locale;
+
 
 public class LogViewer {
-    CatatanKeuanganTable catatanKeuanganTable = CatatanKeuanganTable.getInstance();
-    JumlahUangUser jumlahUangUser = JumlahUangUser.getInstance();
     CategoryTable categoryTable = CategoryTable.getInstance();
     Session session = Session.getInstance();
     LogManager logManager = LogManager.getInstance();
@@ -112,11 +106,6 @@ public class LogViewer {
     public void addingDataCatatanToTable() throws SQLException {
         ArrayList<Object[]> rawData = session.getLogSession();
 
-        for (Object[] i : rawData){
-            System.out.print(i[0]+" ");
-            System.out.println(i[1]);
-        }
-
         ObservableList<Object[]> table = FXCollections.observableArrayList(rawData);
         catatanTV.setItems(table);
 
@@ -156,7 +145,6 @@ public class LogViewer {
             freqCategory.add(Collections.frequency(temp,i));
         }
 
-//        PieChart pieChart = new PieChart();
         pieChart.setTitle("Category Distribution");
         pieChart.setLegendVisible(false);
 
@@ -201,7 +189,6 @@ public class LogViewer {
         }
 
 
-        // === Axes ===
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
         String title = method.getMonthAndYear(session.getLogSession().get(0)[2].toString());
@@ -209,7 +196,7 @@ public class LogViewer {
         xAxis.setLabel("Category");
         yAxis.setLabel("Rupiah");
 
-        // === Data Series ===
+
         XYChart.Series<String, Number> dataSeries = new XYChart.Series<>();
         for (int i = 0; i < category.size(); i++) {
             dataSeries.getData().add(new XYChart.Data<>(category.get(i), totalSpendingCategory.get(i)));
@@ -223,12 +210,10 @@ public class LogViewer {
             }
         });
 
-        // === Add dummy transparent bar if only 1 category ===
         if (category.size() == 1) {
             XYChart.Data<String, Number> dummy = new XYChart.Data<>(" ", 0); // dummy label
             dataSeries.getData().add(dummy);
 
-            // Make dummy transparent when node is created
             dummy.nodeProperty().addListener((obs, oldNode, newNode) -> {
                 if (newNode != null) {
                     newNode.setStyle("-fx-bar-fill: transparent;");
@@ -252,11 +237,9 @@ public class LogViewer {
             protected void updateItem(Object[] item, boolean empty) {
                 super.updateItem(item, empty);
 
-                // Default style (applied to all rows including empty ones)
                 String style = "-fx-border-width: 2 0 0 0;";
 
                 if (!empty && item != null) {
-                    // Check if the row contains "limit"
                     boolean containsLimit = false;
                     boolean containsSurplus = false;
 

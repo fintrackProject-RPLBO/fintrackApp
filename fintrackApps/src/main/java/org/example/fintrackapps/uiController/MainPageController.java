@@ -1,6 +1,5 @@
 package org.example.fintrackapps.uiController;
 
-import io.quarkus.logging.Log;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -10,12 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.example.fintrackapps.dataBaseManager.Session;
 import org.example.fintrackapps.tableManager.*;
@@ -24,10 +20,6 @@ import de.jensd.fx.glyphs.fontawesome.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
-import java.text.NumberFormat;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.format.TextStyle;
 import java.util.*;
 
 public class MainPageController {
@@ -37,9 +29,6 @@ public class MainPageController {
     Session session = Session.getInstance();
     LogManager logManager = LogManager.getInstance();
     MethodCollection method = new MethodCollection();
-
-
-
 
     String currentChart = "pie";
 
@@ -56,15 +45,12 @@ public class MainPageController {
     @FXML private Pane mainPane;
 
     @FXML private GridPane categoryField;
-    @FXML private GridPane categoryColor;
-
 
     @FXML private Label totalLabel;
     @FXML private Label totalPengeluaran;
     @FXML private Label dateLabel;
     @FXML private MenuItem profiles;
     Object[] clickedData;
-//    Object[] clickedDataKategori;
 
     private ContainerController containerController;
 
@@ -77,9 +63,7 @@ public class MainPageController {
 
     public void initialize() throws SQLException {
         styleTableWithClickableRows(catatanTV);
-        // Attach mouse click handler to the background
         popupContainer.setOnMouseClicked(event -> {
-            // Only close if clicked directly on background
             if (event.getTarget() == popupContainer) {
                 try {
                     removePopUp();
@@ -89,7 +73,6 @@ public class MainPageController {
             }
         });
         mainPane.setOnMouseClicked(event -> {
-            // Only close if clicked directly on background
             if (event.getTarget() == mainPane) {
                 styleTableWithClickableRows(catatanTV);
             }
@@ -192,7 +175,11 @@ public class MainPageController {
     @FXML
     private void showLogManager() throws SQLException {
         refreshTable();
-        showPopup("/org/example/fintrackapps/LogViewerManager.fxml");
+        if (logManager.getAllDataCatatan().size() > 0){
+            showPopup("/org/example/fintrackapps/LogViewerManager.fxml");
+        }else{
+            method.confirmationAlert("Anda Belum Memiliki Log Apapun");
+        }
     }
 
 
@@ -210,7 +197,6 @@ public class MainPageController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Node popupContent = loader.load();
-            // Pass the controller reference
             Object controller = loader.getController();
 
             try {
@@ -224,12 +210,12 @@ public class MainPageController {
                 throw new RuntimeException(e);
             }
 
-            popupContainer.getChildren().setAll(popupContent); // Replace content
+            popupContainer.getChildren().setAll(popupContent);
             popupContainer.setVisible(true);
-            popupContainer.toFront(); // Bring to front over other nodes
+            popupContainer.toFront();
             popupContainer.setPrefWidth(1044);
             popupContainer.setPrefHeight(550);
-            // Optional: dim background
+
             popupContainer.setStyle("-fx-background-color: rgba(0, 0, 0, 0.3);");
         } catch (IOException e) {
             e.printStackTrace();

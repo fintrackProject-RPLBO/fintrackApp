@@ -88,3 +88,12 @@
 .chart-bar:empty {
     -fx-bar-fill: transparent;
 }
+
+.logViewer{
+    -fx-background-color: #ebe5c2;
+    -fx-background: #ebe5c2;
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}

@@ -114,7 +114,6 @@ public class EditCatatanPageController {
     private void deleteCatatan() throws SQLException {
         catatanKeuanganTable.deleteCatatan();
         mainPageController.removePopUp();
-//        mainPageController.refreshTable();
         session.unsetClickedDataKategori();
     }
 

@@ -1,8 +1,5 @@
 package org.example.fintrackapps.uiController;
 
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import io.quarkus.logging.Log;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
@@ -13,32 +10,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.example.fintrackapps.dataBaseManager.Session;
-import org.example.fintrackapps.tableManager.CatatanKeuanganTable;
-import org.example.fintrackapps.tableManager.CategoryTable;
-import org.example.fintrackapps.tableManager.JumlahUangUser;
 import org.example.fintrackapps.tableManager.LogManager;
 
-import java.awt.event.ActionEvent;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class LogViewerManagerController {
-    CatatanKeuanganTable catatanKeuanganTable = CatatanKeuanganTable.getInstance();
-    JumlahUangUser jumlahUangUser = JumlahUangUser.getInstance();
-    CategoryTable categoryTable = CategoryTable.getInstance();
     Session session = Session.getInstance();
     LogManager logManager = LogManager.getInstance();
     MethodCollection method = new MethodCollection();
 
     @FXML private ScrollPane scrollPaneContainer;
-
-
-
     private ContainerController containerController;
 
     public LogViewerManagerController() throws SQLException {
@@ -96,7 +83,6 @@ public class LogViewerManagerController {
         logListContainer.setVgap(10);
         logListContainer.setPadding(new Insets(10));
 
-// Set column widths: 70% for label, 30% for button
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(70);
         ColumnConstraints col2 = new ColumnConstraints();
@@ -119,18 +105,14 @@ public class LogViewerManagerController {
                 }
             });
 
-            // Optional: align label to center
             GridPane.setHalignment(labelDate, HPos.CENTER);
             GridPane.setValignment(labelDate, VPos.CENTER);
 
-            // Wrap button in HBox for right alignment
             HBox buttonBox = new HBox(viewButton);
             buttonBox.setAlignment(Pos.CENTER);
             logListContainer.add(labelDate, 0, i);
             logListContainer.add(buttonBox, 1, i);
         }
-
-// Set GridPane as scrollable content
         scrollPaneContainer.setFitToWidth(true); // stretch to scrollpane width
         scrollPaneContainer.setContent(logListContainer);
 
@@ -145,14 +127,10 @@ public class LogViewerManagerController {
         Parent root = fxmlLoader.load();
 
         Stage stage = new Stage();
-        stage.setTitle("New Window");
+        stage.setResizable(false);
+        stage.setTitle("Laporan Keuangan");
         stage.setScene(new Scene(root));
         stage.show();
     }
 
-    public static void main(String[] args) throws SQLException {
-        LogViewerManagerController lvmc = new LogViewerManagerController();
-        Session.getInstance().setUsername("Nicsap");
-        lvmc.showLog();
-    }
 }

@@ -3,25 +3,17 @@ package org.example.fintrackapps.uiController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import org.example.fintrackapps.dataBaseManager.Session;
 import org.example.fintrackapps.tableManager.CatatanKeuanganTable;
-import org.example.fintrackapps.tableManager.CategoryTable;
 import org.example.fintrackapps.tableManager.JumlahUangUser;
-import org.example.fintrackapps.tableManager.UserData;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AddJumlahUangController {
-    UserData userData = UserData.getInstance();
     JumlahUangUser jumlahUangUser = JumlahUangUser.getInstance();
-    Session session = Session.getInstance();
     MethodCollection method = new MethodCollection();
     CatatanKeuanganTable catatanKeuanganTable = CatatanKeuanganTable.getInstance();
-    CategoryTable categoryTable = CategoryTable.getInstance();
 
     private MainPageController mainPageController;
 

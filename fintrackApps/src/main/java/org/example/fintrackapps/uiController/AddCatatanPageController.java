@@ -1,12 +1,8 @@
 package org.example.fintrackapps.uiController;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import org.example.fintrackapps.dataBaseManager.Session;
 import org.example.fintrackapps.tableManager.CatatanKeuanganTable;
 import org.example.fintrackapps.tableManager.CategoryTable;
 import org.example.fintrackapps.tableManager.JumlahUangUser;
-import org.example.fintrackapps.tableManager.UserData;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -18,8 +14,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AddCatatanPageController {
-    UserData userData = UserData.getInstance();
-    Session session = Session.getInstance();
     MethodCollection method = new MethodCollection();
     CatatanKeuanganTable catatanKeuanganTable = CatatanKeuanganTable.getInstance();
     CategoryTable categoryTable = CategoryTable.getInstance();

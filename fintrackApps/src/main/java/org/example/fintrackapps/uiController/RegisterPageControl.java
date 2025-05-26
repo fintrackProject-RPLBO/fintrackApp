@@ -56,9 +56,6 @@ public class RegisterPageControl {
                         method.confirmationAlert("username dan password tidak boleh kosong");
                     }
                     else if(userdata.register(username,password)){
-//                        formSetController.removeForm();
-//                        formSetController.ShowLoginForm();
-
                         categoryTable.addKategori(50000.0,"Makanan",username);
                         categoryTable.addKategori(50000.0,"Transportasi",username);
                         categoryTable.addKategori(50000.0,"Pakaian",username);
@@ -69,7 +66,6 @@ public class RegisterPageControl {
                         method.confirmationAlert("register gagal");
                     }
                 }
-//                formSetController.addingUserDataToTable();
             }
         }else{
             method.confirmationAlert("Password Re-enter tidak sama");

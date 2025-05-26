@@ -5,16 +5,13 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 import org.example.fintrackapps.dataBaseManager.Session;
 import org.example.fintrackapps.tableManager.CategoryTable;
-import org.example.fintrackapps.tableManager.UserData;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 
 public class EditKategoriPageController {
-    UserData userData = UserData.getInstance();
     Session session = Session.getInstance();
-    MethodCollection method = new MethodCollection();
     CategoryTable categoryTable = CategoryTable.getInstance();
 
 
@@ -41,7 +38,7 @@ public class EditKategoriPageController {
         dailyLimitCheckBox.setOnAction(event -> {
             if (!dailyLimitCheckBox.isSelected()) {
                 limit.setEditable(false);
-                limit.clear(); // or inputField.setText("");
+                limit.clear();
             }else{
                 limit.setEditable(true);
             }
@@ -82,6 +79,5 @@ public class EditKategoriPageController {
         categoryTable.deleteKategori();
         session.unsetClickedDataKategori();
         mainPageController.removePopUp();
-//        mainPageController.showCategory();
     }
 }

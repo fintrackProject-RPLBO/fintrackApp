@@ -240,10 +240,5 @@ public class MethodCollection {
         return month+"-"+year;
     }
 
-    public static void main(String[] args) {
-        MethodCollection method = new MethodCollection();
-        System.out.println(method.toCssColor("0x008080ff"));
-    }
-
 
 }

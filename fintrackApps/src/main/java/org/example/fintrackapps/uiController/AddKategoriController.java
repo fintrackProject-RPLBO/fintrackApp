@@ -17,11 +17,6 @@ public class AddKategoriController {
     @FXML private ColorPicker colorPicker;
     @FXML private CheckBox dailyLimitCheckBox;
 
-
-
-    UserData userData = UserData.getInstance();
-    Session session = Session.getInstance();
-    CatatanKeuanganTable catatanKeuanganTable = CatatanKeuanganTable.getInstance();
     MethodCollection method = new MethodCollection();
     CategoryTable categoryTable = CategoryTable.getInstance();
 

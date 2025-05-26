@@ -4,18 +4,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.example.fintrackapps.dataBaseManager.Session;
-import org.example.fintrackapps.tableManager.UserData;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class ContainerController {
-    UserData userdata = UserData.getInstance();
     Session session = Session.getInstance();
-    MethodCollection method = new MethodCollection();
 
     private Node formNode; // To keep track of the form.fxml content
     private String nodePath = "";
