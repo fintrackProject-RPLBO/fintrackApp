@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="itextpdf.layout" type="repository">
+    <properties maven-id="com.itextpdf:layout:8.0.2" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/layout-8.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/kernel-8.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/bouncy-castle-connector-8.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/io-8.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-8.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.36.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

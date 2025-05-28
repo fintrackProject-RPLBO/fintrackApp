@@ -82,7 +82,6 @@ public class UserData {
         }else{
             db.CUDQuery("INSERT INTO userData VALUES (?,?)",new String[] {username, encryptedPassword}, "TEXT TEXT");
             db.CUDQuery("INSERT INTO jumlahUangUser VALUES(?,?)", new String[] {"0.0",username}, "NUMERIC TEXT");
-//            JumlahUangUser.getInstance().addJumlahUangUser(0.0);
             ArrayList<Object[]> checkingData = db.getDataQuery("SELECT * FROM userData WHERE username = ? AND password = ?",new String[] {username,encryptedPassword},"TEXT TEXT");
 
             if (checkingData.size() > 0){

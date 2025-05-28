@@ -10,6 +10,9 @@ module org.example.fintrackapps {
     requires quarkus.jdbc.sqlite;
     requires javafx.swingEmpty;
     requires org.slf4j;
+    requires io;
+    requires kernel;
+    requires layout;
 
 
     opens org.example.fintrackapps.uiController to javafx.fxml;

@@ -1,9 +1,22 @@
 package org.example.fintrackapps.uiController;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.pdf.PdfWriter;
+//import com.itextpdf.io.image.ImageDataFactory;
+//import com.itextpdf.text.Document;
+//import com.itextpdf.text.Image;
+//import com.itextpdf.text.PageSize;
+//import com.itextpdf.text.pdf.PdfDocument;
+//import com.itextpdf.text.pdf.PdfWriter;
+
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Image;
+
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -19,6 +32,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -215,29 +229,29 @@ public class MethodCollection {
         return localdate;
     }
 
-    public String exportNodeToPdf(VBox node, String fileName) {
-        try {
-            WritableImage snapshot = node.snapshot(new SnapshotParameters(), null);
-            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(snapshot, null);
-
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            ImageIO.write(bufferedImage, "png", byteArrayOutputStream);
-
-            Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream(fileName));
-            document.open();
-            Image image = Image.getInstance(byteArrayOutputStream.toByteArray());
-            image.scaleToFit(500, 700); // optional scaling
-            document.add(image);
-            document.close();
-
-            System.out.println("PDF exported to: " + fileName);
-            return "PDF exported to: " + fileName;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return "Error: "+ex.getMessage();
-        }
-    }
+//    public String exportNodeToPdf(VBox node, String fileName) {
+//        try {
+//            WritableImage snapshot = node.snapshot(new SnapshotParameters(), null);
+//            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(snapshot, null);
+//
+//            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//            ImageIO.write(bufferedImage, "png", byteArrayOutputStream);
+//
+//            Document document = new Document();
+//            PdfWriter.getInstance(document, new FileOutputStream(fileName));
+//            document.open();
+//            Image image = Image.getInstance(byteArrayOutputStream.toByteArray());
+//            image.scaleToFit(500, 700); // optional scaling
+//            document.add(image);
+//            document.close();
+//
+//            System.out.println("PDF exported to: " + fileName);
+//            return "PDF exported to: " + fileName;
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            return "Error: "+ex.getMessage();
+//        }
+//    }
 
     public String choosePdfSaveLocation(Stage stage) {
         FileChooser fileChooser = new FileChooser();
@@ -257,6 +271,28 @@ public class MethodCollection {
         String year = splittedDate[0];
         return month+"-"+year;
     }
+
+    public void exportNodeToPDF(Node node, String outputPath) throws IOException {
+        WritableImage fxmImage = node.snapshot(new SnapshotParameters(), null);
+        BufferedImage bImage = SwingFXUtils.fromFXImage(fxmImage, null);
+
+        File tempFile = File.createTempFile("fxsnapshot", ".png");
+        ImageIO.write(bImage, "png", tempFile);
+
+        PdfWriter writer = new PdfWriter(outputPath);
+        PdfDocument pdfDoc = new PdfDocument(writer);
+        Document document = new Document(pdfDoc, PageSize.A4);
+
+        Image pdfImage = new Image(ImageDataFactory.create(tempFile.getAbsolutePath()));
+        pdfImage.scaleToFit(PageSize.A4.getWidth(), PageSize.A4.getHeight());
+        pdfImage.setFixedPosition(0, PageSize.A4.getHeight() - pdfImage.getImageScaledHeight());
+
+        document.add(pdfImage);
+
+        document.close();
+        tempFile.delete();
+    }
+
 
 
 }

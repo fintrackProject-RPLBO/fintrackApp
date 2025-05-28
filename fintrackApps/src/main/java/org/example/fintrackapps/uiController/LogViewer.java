@@ -8,12 +8,14 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.fintrackapps.dataBaseManager.Session;
 import org.example.fintrackapps.tableManager.CategoryTable;
 import org.example.fintrackapps.tableManager.LogManager;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,6 +36,7 @@ public class LogViewer {
     @FXML
     private PieChart pieChart;
 
+    @FXML private GridPane tableContainer;
     @FXML private TableView<Object[]> catatanTV;
     @FXML private TableColumn<Object[], String> kategoriCatatanTC;
     @FXML private TableColumn<Object[], String> hargaTC;
@@ -66,9 +69,14 @@ public class LogViewer {
         setupLabel();
     }
 
-    public void exportLog(){
+    public void exportLog() throws IOException {
         Stage stage = (Stage) log.getScene().getWindow();
-        method.exportNodeToPdf(log,method.choosePdfSaveLocation(stage));
+        ArrayList<Object[]> rawData = session.getLogSession();
+        double tableHeight = tableContainer.getHeight();
+        tableContainer.setPrefHeight((tableHeight + rawData.size())*1.5);
+        method.exportNodeToPDF(log,method.choosePdfSaveLocation(stage));
+        tableContainer.setPrefHeight(tableHeight);
+
     }
 
     @FXML
@@ -108,7 +116,6 @@ public class LogViewer {
 
         ObservableList<Object[]> table = FXCollections.observableArrayList(rawData);
         catatanTV.setItems(table);
-
 
         kategoriCatatanTC.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[0].toString()));
         hargaTC.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[1].toString()));
