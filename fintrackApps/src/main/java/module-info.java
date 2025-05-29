@@ -3,16 +3,20 @@ module org.example.fintrackapps {
     requires javafx.fxml;
     requires java.sql;
     requires de.jensd.fx.glyphs.fontawesome;
-    requires quarkus.core;
+//    requires quarkus.core;
     requires java.desktop;
     requires itextpdf;
     requires javafx.swing;
-    requires quarkus.jdbc.sqlite;
+//    requires quarkus.jdbc.sqlite;
     requires javafx.swingEmpty;
-    requires org.slf4j;
-    requires io;
     requires kernel;
+    requires io;
     requires layout;
+    requires org.slf4j;
+//    requires org.slf4j;
+//    requires io;
+//    requires kernel;
+//    requires layout;
 
 
     opens org.example.fintrackapps.uiController to javafx.fxml;

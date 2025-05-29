@@ -93,7 +93,7 @@ public class CategoryTable {
         }else{
             String kategori = session.getClickedDataKategori()[0].toString();
             if (kategori != null || !kategori.isEmpty()){
-                db.CUDQuery("DELETE FROM kategori WHERE category = ?",new String[] {kategori}, "TEXT");
+                db.CUDQuery("DELETE FROM kategori WHERE category = ? AND user = ?",new String[] {kategori,user}, "TEXT TEXT");
                 return true;
             }
             else{

@@ -76,6 +76,7 @@ public class AddCatatanPageController {
             Double harga = Double.parseDouble(priceField.getText().split(" ")[1]);
             String tanggal = date.getValue().toString();
             String deskripsi = descriptionField.getText();if (deskripsi == null){deskripsi = "";}
+
             if (catatanKeuanganTable.countingTotalSpend(kategori,tanggal)+harga > categoryTable.getLimitKategori(kategori) && categoryTable.getLimitKategori(kategori) > 0){
                     if (method.confirmationAlert("Anda Sudah Melebihi Batas Harian "+ kategori+" Klick ok untuk abaikan")){
                         catatanKeuanganTable.addCatatan(kategori,harga,tanggal,deskripsi, method.getNowDateTime()+" limit");

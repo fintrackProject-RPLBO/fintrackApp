@@ -39,6 +39,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Optional;
@@ -291,6 +292,16 @@ public class MethodCollection {
 
         document.close();
         tempFile.delete();
+    }
+
+
+    public long dayPassed(String Date1, String Date2){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate d1 = LocalDate.parse(Date1, formatter);
+        LocalDate d2 = LocalDate.parse(Date2, formatter);
+
+        long daysBetween = ChronoUnit.DAYS.between(d1, d2);
+        return daysBetween;
     }
 
 

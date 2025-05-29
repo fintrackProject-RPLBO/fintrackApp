@@ -2,20 +2,20 @@ package org.example.fintrackapps.tableManager;
 
 import org.example.fintrackapps.dataBaseManager.DBConnection;
 import org.example.fintrackapps.dataBaseManager.Session;
+import org.example.fintrackapps.uiController.MethodCollection;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 
 public class CatatanKeuanganTable {
     DBConnection db;
     Session session = Session.getInstance();
+    CategoryTable categoryTable = CategoryTable.getInstance();
     JumlahUangUser jumlahUangUser = JumlahUangUser.getInstance();
+    MethodCollection method = new MethodCollection();
 //    LogManager log = LogManager.getInstance();
 
     private static CatatanKeuanganTable instance;
@@ -127,11 +127,32 @@ public class CatatanKeuanganTable {
     public Double countingTotalSpend(String kategori, String date) throws SQLException {
         ArrayList<Object[]> data = getAllDataCatatan();
         double Counter = 0.0;
+        String range = categoryTable.getRange(kategori);
+
         for (Object[] i : data){
-            if (i[0].toString().equals(kategori) && i[2].toString().equals(date) && !i[5].toString().contains("surplus")){
-                Counter += Double.parseDouble(i[1].toString());
+            String[] dateSplit = i[2].toString().split("-");
+            String[] dateSplitInput = date.split("-");
+            if (i[0].toString().equals(kategori) && !i[5].toString().contains("surplus")){
+                if (range.equals("Harian")){
+                    if (i[2].toString().equals(date)){
+                        Counter += Double.parseDouble(i[1].toString());
+                    }
+                }
+                else if (range.equals("Mingguan")){
+                    if (method.dayPassed(Arrays.toString(dateSplit),Arrays.toString(dateSplitInput)) <= 7){
+                        if (i[2].toString().equals(date)){
+                            Counter += Double.parseDouble(i[1].toString());
+                        }
+                    }
+                }
+                else if (range.equals("Bulanan")){
+                    if (dateSplit[0].equals(dateSplitInput[0]) && dateSplit[1].equals(dateSplitInput[1])){
+                        Counter += Double.parseDouble(i[1].toString());
+                    }
+                }
             }
         }
+
 //        System.out.println(Counter+"<---");
         return Counter;
     }

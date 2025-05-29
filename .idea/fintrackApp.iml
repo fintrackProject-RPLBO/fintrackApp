@@ -8,8 +8,8 @@
     <orderEntry type="library" name="de.jensd.fontawesomefx" level="project" />
     <orderEntry type="library" name="itextpdf" level="project" />
     <orderEntry type="library" name="openjfx.javafx.swing" level="project" />
-    <orderEntry type="library" name="io.quarkiverse.jdbc.quarkus.sqlite" level="project" />
     <orderEntry type="library" name="itextpdf.kernel" level="project" />
     <orderEntry type="library" name="itextpdf.layout" level="project" />
+    <orderEntry type="library" name="io.quarkiverse.jdbc.quarkus.sqlite" level="project" />
   </component>
 </module>

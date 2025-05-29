@@ -60,8 +60,6 @@ public class LogViewerManagerController {
                 String dataDate = method.getMonthAndYear(j[2].toString());
 
                 if (i.equals(dataDate)){
-                    System.out.println(i+"<=========");
-                    System.out.println(dataDate+"<=========");
                     temp.add(j);
                 }
             }

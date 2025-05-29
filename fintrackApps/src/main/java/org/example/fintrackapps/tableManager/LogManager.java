@@ -35,17 +35,18 @@ public class LogManager {
     public void loggingExpiredData() throws SQLException {
         ArrayList<Object[]> data = catatanKeuanganTable.getAllDataCatatan();
 
-        for (Object[] i : data){
-            String username = i[4].toString();
-            String lastUpdated = i[5].toString();
-            String makeDate = i[6].toString();
-            LocalDate dataDate = method.strToLocalDate(makeDate);
+        if (jumlahUangUser.getAutoReset().equals("TRUE")){
+            for (Object[] i : data){
+                String username = i[4].toString();
+                String lastUpdated = i[5].toString();
+                String makeDate = i[6].toString();
+                LocalDate dataDate = method.strToLocalDate(makeDate);
 
-            long days = ChronoUnit.DAYS.between(dataDate,LocalDate.now());
-            System.out.println(days + "<----" + lastUpdated);
-            if (days > 30){
-                catatanKeuanganTable.deleteCatatan(username,lastUpdated);
-                System.out.println("masuk pak eko");
+                long days = ChronoUnit.DAYS.between(dataDate,LocalDate.now());
+
+                if (days > 30){
+                    catatanKeuanganTable.deleteCatatan(username,lastUpdated);
+                }
             }
         }
     }
@@ -75,7 +76,7 @@ public class LogManager {
                 Counter += Double.parseDouble(i[1].toString());
             }
         }
-//        System.out.println(Counter+"<---");
+
         return Counter;
     }
 
@@ -87,17 +88,7 @@ public class LogManager {
                 Counter += Double.parseDouble(i[1].toString());
             }
         }
-//        System.out.println(Counter+"<---");
+
         return Counter;
-    }
-
-    public static void main(String[] args) {
-        MethodCollection method = new MethodCollection();
-
-        String lastUpdated = "2025-04-01".split(" ")[0];
-        LocalDate dataDate = method.strToLocalDate(lastUpdated);
-        System.out.println(LocalDate.now());
-        long days = ChronoUnit.DAYS.between(dataDate,LocalDate.now());
-        System.out.println(days);
     }
 }

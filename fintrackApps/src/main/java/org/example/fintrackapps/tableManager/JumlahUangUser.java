@@ -44,7 +44,15 @@ public class JumlahUangUser {
 
     public void updateUsername(String oldUsername,String newUsername) throws SQLException {
         db.CUDQuery("UPDATE jumlahUangUser SET username = ? WHERE username = ?", new String[] {newUsername,oldUsername}, "TEXT TEXT");
+    }
 
+    public String getAutoReset() throws SQLException {
+        ArrayList<Object[]> data = db.getDataQuery("SELECT autoReset FROM jumlahUangUser WHERE username = ?",new String[] {session.getUsername()},"TEXT");
+        return data.get(0)[0].toString();
+    }
+
+    public void setAutoReset(String input) throws SQLException {
+        db.CUDQuery("UPDATE jumlahUangUser SET autoReset = ? WHERE username = ?",new String[] {input,session.getUsername()},"TEXT TEXT");
     }
 
 }

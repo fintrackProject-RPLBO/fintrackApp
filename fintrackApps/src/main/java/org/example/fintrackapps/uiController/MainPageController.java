@@ -46,6 +46,8 @@ public class MainPageController {
 
     @FXML private GridPane categoryField;
 
+    @FXML private CheckBox autoReset;
+
     @FXML private Label totalLabel;
     @FXML private Label totalPengeluaran;
     @FXML private Label dateLabel;
@@ -63,6 +65,28 @@ public class MainPageController {
 
     public void initialize() throws SQLException {
         styleTableWithClickableRows(catatanTV);
+
+        if(jumlahUangUser.getAutoReset().equals("TRUE")){
+            autoReset.setSelected(true);
+        }else{
+            autoReset.setSelected(false);
+        }
+        autoReset.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
+            if (isSelected) {
+                try {
+                    jumlahUangUser.setAutoReset("TRUE");
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }else{
+                try {
+                    jumlahUangUser.setAutoReset("FALSE");
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
         popupContainer.setOnMouseClicked(event -> {
             if (event.getTarget() == popupContainer) {
                 try {
@@ -90,6 +114,10 @@ public class MainPageController {
                 }
             }
         });
+
+
+
+
         switchGraph();
         refreshTable();
         showCategory();
@@ -388,6 +416,12 @@ public class MainPageController {
         }else{
             graphContainer.getChildren().clear();
             graphContainer.getChildren().addAll(getBarChart());
+        }
+
+        if(jumlahUangUser.getAutoReset().equals("TRUE")){
+            autoReset.setSelected(true);
+        }else{
+            autoReset.setSelected(false);
         }
     }
 
