@@ -27,6 +27,7 @@ public class EditCatatanPageController {
     @FXML private TextField priceField;
     @FXML private DatePicker date;
     @FXML private TextField descriptionField;
+    String lastUpdate;
 
     private MainPageController mainPageController;
 
@@ -58,6 +59,9 @@ public class EditCatatanPageController {
         Double harga = Double.parseDouble( session.getClickedDataCatatan()[1].toString());
         String tanggal =  session.getClickedDataCatatan()[2].toString();
         String deskripsi =  session.getClickedDataCatatan()[3].toString();
+        lastUpdate =  session.getClickedDataCatatan()[5].toString();
+        System.out.println(lastUpdate);
+
 
         category.setValue(kategori);
         priceField.setText(String.valueOf(harga));
@@ -75,34 +79,60 @@ public class EditCatatanPageController {
 
         if (originalCategory.equals(category.getValue())){
             if (totalSpendingBefore-originalPrice+editedPrice < limitCategory){
-                jumlahUangUser.addJumlahUangUser(originalPrice);
-                jumlahUangUser.addJumlahUangUser(editedPrice*-1.0);
-                catatanKeuanganTable.editCatatan(category.getValue(), editedPrice, date.getValue().toString(),descriptionField.getText(), method.getNowDateTime());
+                if (lastUpdate.contains("surplus")){
+                    System.out.println("surplus");
+                    jumlahUangUser.addJumlahUangUser(originalPrice*-1.0);
+                    jumlahUangUser.addJumlahUangUser(editedPrice);
+                    catatanKeuanganTable.editCatatan(category.getValue(), editedPrice, date.getValue().toString(),descriptionField.getText(), method.getNowDateTime()+" surplus");
+                }else{
+                    jumlahUangUser.addJumlahUangUser(originalPrice);
+                    jumlahUangUser.addJumlahUangUser(editedPrice*-1.0);
+                    catatanKeuanganTable.editCatatan(category.getValue(), editedPrice, date.getValue().toString(),descriptionField.getText(), method.getNowDateTime());
+                }
                 mainPageController.removePopUp();
                 session.unsetClickedDataKategori();
                 System.out.println("same category");
             }else{
-                jumlahUangUser.addJumlahUangUser(originalPrice);
-                jumlahUangUser.addJumlahUangUser(editedPrice*-1.0);
-                catatanKeuanganTable.editCatatan(category.getValue(), editedPrice, date.getValue().toString(),descriptionField.getText(), method.getNowDateTime()+" limit");
+                if (lastUpdate.contains("surplus")){
+                    System.out.println("surplus");
+                    jumlahUangUser.addJumlahUangUser(originalPrice*-1.0);
+                    jumlahUangUser.addJumlahUangUser(editedPrice);
+                    catatanKeuanganTable.editCatatan(category.getValue(), editedPrice, date.getValue().toString(),descriptionField.getText(), method.getNowDateTime()+" surplus");
+                }else{
+                    jumlahUangUser.addJumlahUangUser(originalPrice);
+                    jumlahUangUser.addJumlahUangUser(editedPrice*-1.0);
+                    catatanKeuanganTable.editCatatan(category.getValue(), editedPrice, date.getValue().toString(),descriptionField.getText(), method.getNowDateTime());
+                }
                 mainPageController.removePopUp();
                 session.unsetClickedDataKategori();
                 System.out.println("same category limit");
             }
         }else{
             if (totalSpendingBefore+editedPrice < limitCategory){
-                jumlahUangUser.addJumlahUangUser(originalPrice);
-                jumlahUangUser.addJumlahUangUser(editedPrice*-1.0);
-
-                catatanKeuanganTable.editCatatan(category.getValue(), editedPrice, date.getValue().toString(),descriptionField.getText(), method.getNowDateTime());
+                if (lastUpdate.contains("surplus")){
+                    System.out.println("surplus");
+                    jumlahUangUser.addJumlahUangUser(originalPrice*-1.0);
+                    jumlahUangUser.addJumlahUangUser(editedPrice);
+                    catatanKeuanganTable.editCatatan(category.getValue(), editedPrice, date.getValue().toString(),descriptionField.getText(), method.getNowDateTime()+" surplus");
+                }else{
+                    jumlahUangUser.addJumlahUangUser(originalPrice);
+                    jumlahUangUser.addJumlahUangUser(editedPrice*-1.0);
+                    catatanKeuanganTable.editCatatan(category.getValue(), editedPrice, date.getValue().toString(),descriptionField.getText(), method.getNowDateTime());
+                }
                 mainPageController.removePopUp();
                 session.unsetClickedDataKategori();
                 System.out.println("diff category");
             }else{
-                jumlahUangUser.addJumlahUangUser(originalPrice);
-                jumlahUangUser.addJumlahUangUser(editedPrice*-1.0);
-
-                catatanKeuanganTable.editCatatan(category.getValue(), editedPrice, date.getValue().toString(),descriptionField.getText(), method.getNowDateTime()+" limit");
+                if (lastUpdate.contains("surplus")){
+                    System.out.println("surplus");
+                    jumlahUangUser.addJumlahUangUser(originalPrice*-1.0);
+                    jumlahUangUser.addJumlahUangUser(editedPrice);
+                    catatanKeuanganTable.editCatatan(category.getValue(), editedPrice, date.getValue().toString(),descriptionField.getText(), method.getNowDateTime()+" surplus");
+                }else{
+                    jumlahUangUser.addJumlahUangUser(originalPrice);
+                    jumlahUangUser.addJumlahUangUser(editedPrice*-1.0);
+                    catatanKeuanganTable.editCatatan(category.getValue(), editedPrice, date.getValue().toString(),descriptionField.getText(), method.getNowDateTime());
+                }
                 mainPageController.removePopUp();
                 session.unsetClickedDataKategori();
                 System.out.println("diff category limit");
