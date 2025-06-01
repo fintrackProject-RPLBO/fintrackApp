@@ -125,6 +125,10 @@ public class UserData {
     }
     public void changeUsername(String username, String password) throws SQLException {
         db.CUDQuery("UPDATE userData SET username = ? WHERE username = ? AND password = ?", new String[] {username, session.getUsername(),password}, "TEXT TEXT TEXT");
+        db.CUDQuery("UPDATE catatanKeuangan SET user = ? WHERE user = ?", new String[] {username, session.getUsername()}, "TEXT TEXT");
+        db.CUDQuery("UPDATE catatanKeuanganLog SET user = ? WHERE user = ?", new String[] {username, session.getUsername()}, "TEXT TEXT");
+        db.CUDQuery("UPDATE kategori SET user = ? WHERE user = ?", new String[] {username, session.getUsername()}, "TEXT TEXT");
+
         jumlahUangUser.updateUsername(session.getUsername(), username);
         log.updateUsername(session.getUsername(),username);
         session.setUsername(username);
